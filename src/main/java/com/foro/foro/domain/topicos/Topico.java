@@ -1,6 +1,7 @@
 package com.foro.foro.domain;
 
 
+import com.foro.foro.domain.usuarios.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

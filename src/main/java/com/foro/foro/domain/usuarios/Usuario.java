@@ -20,8 +20,6 @@ public class Usuario {
     private String correo;
     private String clave;
 
-    public Usuario() {}
-
     public Usuario(DatosRegistroUsuario datos) {
         this.id = null;
         this.nombre = datos.nombre();
