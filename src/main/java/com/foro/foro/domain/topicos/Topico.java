@@ -1,4 +1,4 @@
-package com.foro.foro.domain;
+package com.foro.foro.domain.topicos;
 
 
 import com.foro.foro.domain.usuarios.Usuario;
@@ -23,13 +23,13 @@ public class Topico {
     private String titulo;
     private String mensaje;
     private LocalDateTime fecha;
-    private Usuario usuario;
+    //private Usuario usuario;
 
     public Topico(DatosRegistroTopico datos) {
         this.id = null;
         this.titulo = datos.titulo();
         this.mensaje = datos.mensaje();
         this.fecha = datos.fecha();
-        this.usuario = datos.usuario();
+        //this.usuario = datos.usuario();
     }
 }

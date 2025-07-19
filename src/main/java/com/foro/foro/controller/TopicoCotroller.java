@@ -1,9 +1,9 @@
 package com.foro.foro.controller;
 
 
-import com.foro.foro.domain.DatosRegistroTopico;
-import com.foro.foro.domain.Topico;
-import com.foro.foro.domain.TopicoRepository;
+import com.foro.foro.domain.topicos.DatosRegistroTopico;
+import com.foro.foro.domain.topicos.Topico;
+import com.foro.foro.domain.topicos.TopicoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,10 +1,10 @@
 package com.foro.foro.domain.usuarios;
 
-public record DatosListaUsuarios(
+public record DatosListaUsuario(
         Long id,
         String nombre
 ) {
-    public DatosListaUsuarios(Usuario usuario) {
+    public DatosListaUsuario(Usuario usuario) {
         this(usuario.getId(), usuario.getNombre());
     }
 }

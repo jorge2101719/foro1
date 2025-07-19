@@ -1,4 +1,4 @@
-package com.foro.foro.domain;
+package com.foro.foro.domain.usuarios;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
