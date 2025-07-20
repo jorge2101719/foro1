@@ -2,7 +2,6 @@ package com.foro.foro.controller;
 
 
 import com.foro.foro.domain.cursos.*;
-import com.foro.foro.domain.usuarios.DatosListaUsuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,20 +18,21 @@ public class CursoController {
     @Autowired
     private CursoRepository cursoRepository;
 
+    @Transactional
     @PostMapping
-    public ResponseEntity<DatosListaCurso> agregarCurso(@RequestBody @Valid DatosRegistroCurso datosRegistroCurso) {
-        Curso curso = cursoRepository.save(new Curso(datosRegistroCurso));
+    public void agregarCurso(@RequestBody @Valid DatosRegistroCurso datos) {
+        cursoRepository.save(new Curso(datos));
     }
 
     @GetMapping
     public ResponseEntity<Page<DatosListaCurso>> listarCursos(@PageableDefault(size = 10) Pageable pageable) {
-        Page<DatosListaUsuario> listaUsuarios = cursoRepository.findAll(pageable).map(DatosListaUsuario::new);
-        return ResponseEntity.ok(listaUsuarios);
+        Page<DatosListaCurso> listaCursos = cursoRepository.findAll(pageable).map(DatosListaCurso::new);
+        return ResponseEntity.ok(listaCursos);
     }
 
     @Transactional
     @PutMapping
-    public void actualizar(@RequestBody @Valid DatosActualizarCurso datos) {
+    public void actualizarCurso(@RequestBody @Valid DatosActualizarCurso datos) {
         Curso curso = cursoRepository.getReferenceById(datos.id());
         curso.actualizarCurso(datos);
     }
@@ -40,7 +40,7 @@ public class CursoController {
     // borrar usuario
     @Transactional
     @DeleteMapping("/{id}")
-    public void borrar(@PathVariable Long id) {
+    public void borrarCurso(@PathVariable Long id) {
         cursoRepository.deleteById(id);
     }
 
