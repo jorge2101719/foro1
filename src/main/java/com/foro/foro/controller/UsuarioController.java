@@ -1,9 +1,6 @@
 package com.foro.foro.controller;
 
-import com.foro.foro.domain.usuarios.DatosListaUsuario;
-import com.foro.foro.domain.usuarios.DatosRegistroUsuario;
-import com.foro.foro.domain.usuarios.Usuario;
-import com.foro.foro.domain.usuarios.UsuarioRepository;
+import com.foro.foro.domain.usuarios.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +18,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    // agregar usuarios
     @Transactional
     @PostMapping
     public void registrarUsuario(@RequestBody @Valid DatosRegistroUsuario datos) {
@@ -28,9 +26,28 @@ public class UsuarioController {
         usuarioRepository.save(new Usuario(datos));
     }
 
+    // listar usuarios
     @GetMapping
     public ResponseEntity<Page<DatosListaUsuario>> listarUsuarios(@PageableDefault(size = 10) Pageable pageable) {
         Page<DatosListaUsuario> listaUsuarios = usuarioRepository.findAll(pageable).map(DatosListaUsuario::new);
         return ResponseEntity.ok(listaUsuarios);
     }
+
+    // actualizar datos de usuarios
+    @Transactional
+    @PutMapping
+    public void actualizar(@RequestBody @Valid DatosActualizarUsuario datos) {
+        Usuario usuario = usuarioRepository.getReferenceById(datos.id());
+        usuario.actualizarUsuario(datos);
+    }
+
+    // borrar usuario
+    @Transactional
+    @DeleteMapping("/{id}")
+    public void borrar(@PathVariable Long id) {
+        usuarioRepository.deleteById(id);
+    }
+
+
+
 }

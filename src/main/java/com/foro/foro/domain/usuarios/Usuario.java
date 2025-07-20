@@ -19,11 +19,27 @@ public class Usuario {
     private String nombre;
     private String correo;
     private String clave;
+    //private Boolean admin = false;
 
     public Usuario(DatosRegistroUsuario datos) {
         this.id = null;
         this.nombre = datos.nombre();
         this.correo = datos.correo();
         this.clave = datos.clave();
+        //this.admin = datos.admin();
+    }
+
+    public void actualizarUsuario(DatosActualizarUsuario datos) {
+        if (datos.nombre() != null) {
+            this.nombre = datos.nombre();
+        }
+
+        if (datos.correo() != null) {
+            this.correo = datos.correo();
+        }
+
+        if (datos.clave() != null) {
+            this.clave = datos.clave();
+        }
     }
 }

@@ -23,13 +23,23 @@ public class Topico {
     private String titulo;
     private String mensaje;
     private LocalDateTime fecha;
-    //private Usuario usuario;
+    private Boolean status;
 
-    public Topico(DatosRegistroTopico datos) {
-        this.id = null;
-        this.titulo = datos.titulo();
-        this.mensaje = datos.mensaje();
-        this.fecha = datos.fecha();
-        //this.usuario = datos.usuario();
+    private Usuario usuario;
+
+    //private Curso curso;
+
+    //private List<Respuesta> respuestaList;
+
+    public void actualizarTopico(DatosRegistroTopico datos) {
+        Boolean check = false;
+
+        if (datosActualizarTopico.titulo() != null) {
+            this.titulo = datosActualizarTopico.titulo();
+            check = true;
+        }
     }
+
+
+
 }

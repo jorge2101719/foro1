@@ -1,4 +1,10 @@
 package com.foro.foro.domain.cursos;
 
-public record DatosActualizarCurso() {
+import jakarta.validation.constraints.NotNull;
+
+public record DatosActualizarCurso(
+        @NotNull Long id,
+        String nombre,
+        String categoria
+) {
 }

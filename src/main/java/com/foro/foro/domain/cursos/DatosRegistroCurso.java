@@ -1,4 +1,10 @@
 package com.foro.foro.domain.cursos;
 
-public record DatosRegistroCurso() {
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.NotBlank;
+
+public record DatosRegistroCurso(
+        @NotBlank String nombre,
+        @Nullable String categoria
+) {
 }
