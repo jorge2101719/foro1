@@ -1,12 +1,11 @@
 package com.foro.foro.controller;
 
 
+import com.foro.foro.domain.topicos.DatosActualizarTopico;
 import com.foro.foro.domain.topicos.DatosRegistroTopico;
 import com.foro.foro.domain.topicos.Topico;
 import com.foro.foro.domain.topicos.TopicoRepository;
-import com.foro.foro.domain.usuarios.DatosActualizarUsuario;
 import com.foro.foro.domain.usuarios.DatosListaUsuario;
-import com.foro.foro.domain.usuarios.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,14 +39,14 @@ public class TopicoCotroller {
     // actualizar tópico
     @Transactional
     @PutMapping
-    public void actualizar(@RequestBody @Valid DatosActualizarUsuario datos) {
-        Usuario usuario = topicoRepository.getReferenceById(datos.id());
-        usuario.actualizarTopico(datos);
+    public void actualizarTopico(@RequestBody DatosActualizarTopico datos) {
+        Topico topico = topicoRepository.getReferenceById(datos.id());
+        topico.actualizarTopico(datos);
     }
 
     // borrar tópico
     @Transactional
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/respuestas")
     public void borrar(@PathVariable Long id) {
         topicoRepository.deleteById(id);
     }

@@ -1,4 +1,12 @@
 package com.foro.foro.domain.respuestas;
 
-public record DatosRegistroRespuesta() {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record DatosRegistroRespuesta(
+        @NotNull Long id_usuario,
+        @NotBlank String mensaje,
+        @NotBlank String nombreCurso,
+        @NotBlank String titulo
+        ) {
 }

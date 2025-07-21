@@ -1,8 +1,10 @@
 package com.foro.foro.domain.topicos;
 
 
+import com.foro.foro.domain.cursos.Curso;
 import com.foro.foro.domain.usuarios.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,6 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Topico {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,17 +30,19 @@ public class Topico {
 
     private Usuario usuario;
 
-    //private Curso curso;
+    private Curso curso;
 
     //private List<Respuesta> respuestaList;
 
-    public void actualizarTopico(DatosRegistroTopico datos) {
-        Boolean check = false;
+    public void actualizarTopico(@Valid DatosActualizarTopico datos) {
+        //Boolean check = false;
 
         if (datosActualizarTopico.titulo() != null) {
             this.titulo = datosActualizarTopico.titulo();
             check = true;
         }
+
+        if () {}
     }
 
 
