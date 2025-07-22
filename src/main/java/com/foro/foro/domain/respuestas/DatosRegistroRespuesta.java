@@ -9,4 +9,7 @@ public record DatosRegistroRespuesta(
         @NotBlank String nombreCurso,
         @NotBlank String titulo
         ) {
+
+
+
 }

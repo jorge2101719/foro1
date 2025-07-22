@@ -10,11 +10,11 @@ public record DatosListaTopico(
 ) {
 
     public DatosListaTopico(Topico topico) {
-
         this(
                 topico.getId(),
                 topico.getTitulo(),
-                topico.getMensaje()
+                topico.getMensaje(),
+                topico.getFecha()
         );
     }
 

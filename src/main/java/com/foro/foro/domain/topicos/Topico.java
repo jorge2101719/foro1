@@ -2,6 +2,7 @@ package com.foro.foro.domain.topicos;
 
 
 import com.foro.foro.domain.cursos.Curso;
+import com.foro.foro.domain.respuestas.Respuesta;
 import com.foro.foro.domain.usuarios.Usuario;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -11,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Table(name = "topicos")
 @Entity(name = "Topico")
@@ -32,17 +34,35 @@ public class Topico {
 
     private Curso curso;
 
-    //private List<Respuesta> respuestaList;
+    private List<Respuesta> respuestaList;
+
+    public Topico(@Valid DatosRegistroTopico datosRegistroTopico) {
+    }
 
     public void actualizarTopico(@Valid DatosActualizarTopico datos) {
-        //Boolean check = false;
+        boolean check = false;
 
-        if (datosActualizarTopico.titulo() != null) {
-            this.titulo = datosActualizarTopico.titulo();
+        if (datos.titulo() != null) {
+            this.titulo = datos.titulo();
             check = true;
         }
 
-        if () {}
+        if (datos.mensaje() != null) {
+            this.mensaje = datos.mensaje();
+            check = true;
+        }
+
+        if (check) {
+            this.fecha = LocalDateTime.now();
+        }
+    }
+
+    public void desativaTopico() {
+        this.status = false;
+    }
+
+    public void agregarRespuesta(Respuesta respuesta) {
+        respuestaList.add(respuesta);
     }
 
 

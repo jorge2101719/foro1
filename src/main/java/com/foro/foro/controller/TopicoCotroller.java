@@ -1,10 +1,7 @@
 package com.foro.foro.controller;
 
 
-import com.foro.foro.domain.topicos.DatosActualizarTopico;
-import com.foro.foro.domain.topicos.DatosRegistroTopico;
-import com.foro.foro.domain.topicos.Topico;
-import com.foro.foro.domain.topicos.TopicoRepository;
+import com.foro.foro.domain.topicos.*;
 import com.foro.foro.domain.usuarios.DatosListaUsuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +22,21 @@ public class TopicoCotroller {
     // agregar tópico
     @Transactional
     @PostMapping
-    public void registrarTopico(@RequestBody @Valid DatosRegistroTopico datos) {
-        topicoRepository.save(new Topico(datos));
+    public void registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico) {
+        topicoRepository.save(new Topico(datosRegistroTopico));
     }
 
     // listar tópico
     @GetMapping
-    public ResponseEntity<Page<DatosListaUsuario>> listarTopicos(@PageableDefault(size = 10) Pageable pageable) {
-        Page<DatosListaUsuario> listaUsuarios = topicoRepository.findAll(pageable).map(DatosListaUsuario::new);
-        return ResponseEntity.ok(listaUsuarios);
+    public ResponseEntity<Page<DatosListaTopico>> listarTopicos(@PageableDefault(size = 10) Pageable pageable) {
+        Page<DatosListaTopico> listaTopico = topicoRepository.findAll(pageable).map(DatosListaTopico::new);
+        return ResponseEntity.ok(listaTopico);
     }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<DatosListaUsuario> mostrarTopico(@PathVariable Long id) {
+//        return ResponseEntity.ok(topicoService.getTopioc(id));
+//    }
 
     // actualizar tópico
     @Transactional
@@ -46,7 +48,7 @@ public class TopicoCotroller {
 
     // borrar tópico
     @Transactional
-    @DeleteMapping("/{id}/respuestas")
+    @DeleteMapping("/{id}")
     public void borrar(@PathVariable Long id) {
         topicoRepository.deleteById(id);
     }

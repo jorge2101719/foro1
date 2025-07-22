@@ -1,10 +1,8 @@
 package com.foro.foro.controller;
 
 
-import com.foro.foro.domain.respuestas.DatosListaRespuestas;
-import com.foro.foro.domain.respuestas.DatosRegistroRespuesta;
-import com.foro.foro.domain.respuestas.Respuesta;
-import com.foro.foro.domain.respuestas.RespuestaRepository;
+import com.foro.foro.domain.respuestas.*;
+import com.foro.foro.domain.topicos.Topico;
 import com.foro.foro.domain.usuarios.DatosActualizarUsuario;
 import com.foro.foro.domain.usuarios.DatosListaUsuario;
 import com.foro.foro.domain.usuarios.Usuario;
@@ -18,22 +16,26 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@ResponseBody
 @RequestMapping("/respuestas")
 public class RespuestaController {
 
     @Autowired
-    private RespuestaRepository respuestaRepository;
+    private RespuestaService respuestaService;
 
     @Transactional
     @PostMapping
-    public void agregarRespuesta(@RequestBody @Valid DatosRegistroRespuesta datos) {
-        respuestaRepository.save(new Respuesta(datos));
+    public ResponseEntity<DatosListaRespuestas> agregarRespuesta(@RequestBody @Valid DatosRegistroRespuesta datosRegistroRespuesta) {
+
+        DatosListaRespuestas datosListaRespuestas = respuestaService.agregarRespuesta(datosRegistroRespuesta);
+        return ResponseEntity.ok(datosListaRespuestas);
+
     }
 
     @GetMapping
     public ResponseEntity<Page<DatosListaRespuestas>> listarUsuarios(@PageableDefault(size = 10) Pageable pageable) {
-        Page<DatosListaUsuario> listaUsuarios = respuestaRepository.findAll(pageable).map(DatosListaUsuario::new);
-        return ResponseEntity.ok(listaUsuarios);
+        //Page<DatosListaUsuario> listaUsuarios = respuestaRepository.findAll(pageable).map(DatosListaUsuario::new);
+        return ResponseEntity.ok(respuestaService.getRespuestas(pageable));
     }
 
     // actualizar datos de usuarios
