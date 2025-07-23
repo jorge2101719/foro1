@@ -41,6 +41,7 @@ public class ErrorCatcher {
         return ResponseEntity.badRequest().body(res);
     }
 
+    // del profesor
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity tratarError404() {
         return ResponseEntity.notFound().build();

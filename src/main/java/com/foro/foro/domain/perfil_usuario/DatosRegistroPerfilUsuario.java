@@ -4,8 +4,8 @@ import jakarta.validation.constraints.NotNull;
 
 public record DatosRegistroPerfilUsuario(
         @NotNull
-        Long usuario_id,
+        Long id_usuario,
         @NotNull
-        Long perfil_id
+        Long id_perfil
 ) {
 }

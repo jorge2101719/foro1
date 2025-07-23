@@ -1,6 +1,7 @@
 package com.foro.foro.controller;
 
 
+import com.foro.foro.domain.usuarios.DatosAutenticacionUsuario;
 import com.foro.foro.domain.usuarios.Usuario;
 import com.foro.foro.utils.security.DatosJWTToken;
 import com.foro.foro.utils.security.TokenService;

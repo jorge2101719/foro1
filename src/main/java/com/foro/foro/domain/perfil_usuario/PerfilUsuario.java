@@ -1,7 +1,7 @@
 package com.foro.foro.domain.perfil_usuario;
 
-import com.challenge.forohub.domain.perfiles.Perfil;
-import com.challenge.forohub.domain.usuarios.Usuario;
+import com.foro.foro.domain.perfiles.Perfil;
+import com.foro.foro.domain.usuarios.Usuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -21,11 +21,11 @@ public class PerfilUsuario {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "perfil_id")
+    @JoinColumn(name = "id_perfil")
     private Perfil perfil;
 
 }

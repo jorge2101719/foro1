@@ -11,7 +11,7 @@ create table respuestas(
 
     constraint fk_respuestas_topico_id foreign key(topico_id) references topico(id),
 
-    constraint fk_respuestas_id_id_usuario foreign key(id_usuario) references usuario(id)
+    constraint fk_respuestas_id_id_usuario foreign key(id_usuario) references usuarios(id)
 
 
 );

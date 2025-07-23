@@ -1,4 +1,10 @@
 package com.foro.foro.domain.usuarios;
 
-public record DatosAutenticacionUsuario() {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
+public record DatosAutenticacionUsuario(
+        @NotBlank @Email String correo,
+        @NotBlank String clave
+) {
 }

@@ -4,7 +4,11 @@ public record DatosListaPerfilUsuario(
         String nomrbreUsuario,
         String nombrePerfil
 ) {
-    public DatosListaPerfilUsuario(PerfilUsuario usuarioPerfil) {
-        this(usuarioPerfil.getUsuario().getNombre(), usuarioPerfil.getPerfil().getNombre());
+    public DatosListaPerfilUsuario(PerfilUsuario perfilUsuario) {
+        this(
+                //perfilUsuario.getId(),
+                perfilUsuario.getUsuario().getNombre(),
+                perfilUsuario.getPerfil().getNombre()
+        );
     }
 }
