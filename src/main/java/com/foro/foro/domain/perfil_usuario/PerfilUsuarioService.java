@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class Usuario_Perfil_Service {
+public class PerfilUsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -20,9 +20,9 @@ public class Usuario_Perfil_Service {
     private PerfilRespository perfilRespository;
 
     @Autowired
-    private Usuario_Perfil_Repository usuarioPerfilRepository;
+    private PerfilUsuarioRepository usuarioPerfilRepository;
 
-    public DatosListado_Usuario_perfil agregarPefil(DatosRegistro_Usuario_Perfil datosRegistroUsuarioPerfil) {
+    public DatosListaPerfilUsuario agregarPefil(DatosRegistroPerfilUsuario datosRegistroUsuarioPerfil) {
 
         Usuario usuario;
         Perfil perfil;
@@ -37,15 +37,15 @@ public class Usuario_Perfil_Service {
         usuario = usuarioRepository.getReferenceById(datosRegistroUsuarioPerfil.usuario_id());
         perfil = perfilRespository.getReferenceById(datosRegistroUsuarioPerfil.perfil_id());
 
-        Usuario_Perfil usuarioPerfil = new Usuario_Perfil(null, usuario, perfil);
+        PerfilUsuario usuarioPerfil = new PerfilUsuario(null, usuario, perfil);
 
-        Usuario_Perfil usuarioPerfil1 = usuarioPerfilRepository.save(usuarioPerfil);
+        PerfilUsuario usuarioPerfil1 = usuarioPerfilRepository.save(usuarioPerfil);
 
-        return new DatosListado_Usuario_perfil(usuarioPerfil1);
+        return new DatosListaPerfilUsuario(usuarioPerfil1);
     }
 
-    public List<DatosListado_Usuario_perfil> mostrarUsuarioPerfil() {
-        return usuarioPerfilRepository.findAll().stream().map(DatosListado_Usuario_perfil::new).toList();
+    public List<DatosListaPerfilUsuario> mostrarUsuarioPerfil() {
+        return usuarioPerfilRepository.findAll().stream().map(DatosListaPerfilUsuario::new).toList();
     }
 
     public void borrarUsuarioPerfil(Long id) {

@@ -11,20 +11,21 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 
 @RestControllerAdvice
 public class ErrorCatcher {
 
     @ExceptionHandler(InternalAuthenticationServiceException.class)
-    public ResponseEntity
-    catchInternalAuthSE(InternalAuthenticationServiceExcpetion e) {
-        var msj = "Error en credenciales del usuario";
+    public ResponseEntity catchInternalAuthSE(InternalAuthenticationServiceException e) {
+        var msj = "Error de credenciales usuario";
         return ResponseEntity.badRequest().body(msj);
     }
 
-    @ExceptionHandler(BadCredentialException.class)
-    public ResponseEntity catchInternalAuthSE(BadCredentialException e) {
-        var msj = "Error de password";
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity catchInternalAuthSE(BadCredentialsException e) {
+        var msj = "Error de credenciales password";
         return ResponseEntity.badRequest().body(msj);
     }
 
@@ -32,6 +33,7 @@ public class ErrorCatcher {
     public ResponseEntity catchNullPointerException() {
         return ResponseEntity.notFound().build();
     }
+
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public ResponseEntity catchSQLICVE(SQLIntegrityConstraintViolationException e) {
@@ -67,4 +69,5 @@ public class ErrorCatcher {
             this(fieldError.getField(), fieldError.getDefaultMessage());
         }
     }
+
 }
