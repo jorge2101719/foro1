@@ -1,34 +1,37 @@
 package com.foro.foro.controller;
 
 
+import com.foro.foro.domain.perfil_usuario.DatosListaPerfilUsuario;
+import com.foro.foro.domain.perfil_usuario.DatosRegistroPerfilUsuario;
+import com.foro.foro.domain.perfil_usuario.PerfilUsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @ResponseBody
 @RequestMapping("/usuarioperfil")
-@SecurityRequirement(name = "bearer-key")
 public class UsuarioPerfilController {
 
     @Autowired
-    private UsuarioPerfilService usuarioPerfilService;
+    private PerfilUsuarioService perfilUsuarioService;
 
     @PostMapping
-    public ResponseEntity<DatosListado_Usuario_perfil> agregarUsuariosPerfiles(@RequestBody @Valid DatosRegistro_Usuario_Perfil datosRegistroUsuarioPerfil) {
-        return ResponseEntity.ok(usuarioPerfilService.agregarPefil(datosRegistroUsuarioPerfil));
+    public ResponseEntity<DatosListaPerfilUsuario> agregarUsuariosPerfiles(@RequestBody @Valid DatosRegistroPerfilUsuario datosRegistroPerfilUsuario) {
+        return ResponseEntity.ok(perfilUsuarioService.agregarPerfil(datosRegistroPerfilUsuario));
     }
 
     @GetMapping
-    public ResponseEntity<List<DatosListado_Usuario_perfil>> mostrarPerfilesUsuarios() {
-        return ResponseEntity.ok(usuarioPerfilService.mostrarUsuarioPerfil());
+    public ResponseEntity<List<DatosListaPerfilUsuario>> mostrarPerfilesUsuarios() {
+        return ResponseEntity.ok(perfilUsuarioService.mostrarPerfilUsuario());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity borrarUsuarioPerfil(@PathVariable Long id) {
-        usuarioPerfilService.borrarUsuarioPerfil(id);
+        perfilUsuarioService.borrarUsuarioPerfil(id);
         return ResponseEntity.noContent().build();
     }
 

@@ -8,8 +8,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "usuario_perfil")
-@Entity(name = "Usuario_Perfil")
+@Table(name = "perfil_usuario")
+@Entity(name = "PerfilUsuario")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

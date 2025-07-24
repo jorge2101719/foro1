@@ -1,10 +1,10 @@
 package com.foro.foro.domain.perfil_usuario;
 
-import com.challenge.forohub.domain.perfiles.Perfil;
-import com.challenge.forohub.domain.perfiles.PerfilRespository;
-import com.challenge.forohub.domain.usuarios.Usuario;
-import com.challenge.forohub.domain.usuarios.UsuarioRepository;
-import com.challenge.forohub.utils.errores.ErrorDeConsulta;
+import com.foro.foro.domain.perfiles.Perfil;
+import com.foro.foro.domain.perfiles.PerfilRepository;
+import com.foro.foro.domain.usuarios.Usuario;
+import com.foro.foro.domain.usuarios.UsuarioRepository;
+import com.foro.foro.utils.errores.ErrorDeConsulta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,25 +17,25 @@ public class PerfilUsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
-    private PerfilRespository perfilRespository;
+    private PerfilRepository perfilRepository;
 
     @Autowired
     private PerfilUsuarioRepository usuarioPerfilRepository;
 
-    public DatosListaPerfilUsuario agregarPefil(DatosRegistroPerfilUsuario datosRegistroUsuarioPerfil) {
+    public DatosListaPerfilUsuario agregarPerfil(DatosRegistroPerfilUsuario datosRegistroUsuarioPerfil) {
 
         Usuario usuario;
         Perfil perfil;
 
-        if (usuarioRepository.findById(datosRegistroUsuarioPerfil.usuario_id()).isEmpty()) {
+        if (usuarioRepository.findById(datosRegistroUsuarioPerfil.id_usuario()).isEmpty()) {
             throw new ErrorDeConsulta("No se halló el usuario");
         }
-        if (perfilRespository.findById(datosRegistroUsuarioPerfil.perfil_id()).isEmpty()) {
+        if (perfilRepository.findById(datosRegistroUsuarioPerfil.id_perfil()).isEmpty()) {
             throw new ErrorDeConsulta("No se halló el perfil");
         }
 
-        usuario = usuarioRepository.getReferenceById(datosRegistroUsuarioPerfil.usuario_id());
-        perfil = perfilRespository.getReferenceById(datosRegistroUsuarioPerfil.perfil_id());
+        usuario = usuarioRepository.getReferenceById(datosRegistroUsuarioPerfil.id_usuario());
+        perfil = perfilRepository.getReferenceById(datosRegistroUsuarioPerfil.id_usuario());
 
         PerfilUsuario usuarioPerfil = new PerfilUsuario(null, usuario, perfil);
 
