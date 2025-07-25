@@ -20,7 +20,7 @@ public class PerfilUsuarioService {
     private PerfilRepository perfilRepository;
 
     @Autowired
-    private PerfilUsuarioRepository usuarioPerfilRepository;
+    private PerfilUsuarioRepository perfilUsuarioRepository;
 
     public DatosListaPerfilUsuario agregarPerfil(DatosRegistroPerfilUsuario datosRegistroUsuarioPerfil) {
 
@@ -30,6 +30,7 @@ public class PerfilUsuarioService {
         if (usuarioRepository.findById(datosRegistroUsuarioPerfil.id_usuario()).isEmpty()) {
             throw new ErrorDeConsulta("No se halló el usuario");
         }
+
         if (perfilRepository.findById(datosRegistroUsuarioPerfil.id_perfil()).isEmpty()) {
             throw new ErrorDeConsulta("No se halló el perfil");
         }
@@ -39,16 +40,16 @@ public class PerfilUsuarioService {
 
         PerfilUsuario usuarioPerfil = new PerfilUsuario(null, usuario, perfil);
 
-        PerfilUsuario usuarioPerfil1 = usuarioPerfilRepository.save(usuarioPerfil);
+        PerfilUsuario usuarioPerfil1 = perfilUsuarioRepository.save(usuarioPerfil);
 
         return new DatosListaPerfilUsuario(usuarioPerfil1);
     }
 
-    public List<DatosListaPerfilUsuario> mostrarUsuarioPerfil() {
-        return usuarioPerfilRepository.findAll().stream().map(DatosListaPerfilUsuario::new).toList();
+    public void borrarUsuarioPerfil(Long id) {
+        perfilUsuarioRepository.deleteById(id);
     }
 
-    public void borrarUsuarioPerfil(Long id) {
-        usuarioPerfilRepository.deleteById(id);
+    public List<DatosListaPerfilUsuario> mostrarPerfilUsuario() {
+        return perfilUsuarioRepository.findAll().stream().map(DatosListaPerfilUsuario::new).toList();
     }
 }

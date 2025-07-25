@@ -2,10 +2,6 @@ package com.foro.foro.controller;
 
 
 import com.foro.foro.domain.respuestas.*;
-import com.foro.foro.domain.topicos.Topico;
-import com.foro.foro.domain.usuarios.DatosActualizarUsuario;
-import com.foro.foro.domain.usuarios.DatosListaUsuario;
-import com.foro.foro.domain.usuarios.Usuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,9 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @ResponseBody
 @RequestMapping("/respuestas")
+//@SecurityRequirement(name = "baerer-key")
 public class RespuestaController {
 
     @Autowired
@@ -38,19 +36,25 @@ public class RespuestaController {
         return ResponseEntity.ok(respuestaService.getRespuestas(pageable));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosListaRespuestas> mostrarRespuesta(@PathVariable Long id) {
+        return ResponseEntity.ok(respuestaService.getRespuesta(id));
+    }
+
+
     // actualizar datos de usuarios
     @Transactional
     @PutMapping
-    public void actualizar(@RequestBody @Valid DatosActualizarUsuario datos) {
-        Usuario usuario = respuestaRepository.getReferenceById(datos.id());
-        usuario.actualizarUsuario(datos);
+    public ResponseEntity<DatosListaRespuestas> actualizarRespuesta(@RequestBody @Valid DatosActualizarRespuesta datosActualizarRespuesta) {
+        DatosListaRespuestas datosListaRespuestas = respuestaService.actualizaRespuesta(datosActualizarRespuesta);
+        return ResponseEntity.ok(datosListaRespuestas);
     }
 
     // borrar usuario
     @Transactional
     @DeleteMapping("/{id}")
     public void borrar(@PathVariable Long id) {
-        respuestaRepository.deleteById(id);
+        respuestaService.deleteRespuesta(id);
     }
 
 }
