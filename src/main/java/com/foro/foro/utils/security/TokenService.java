@@ -18,7 +18,8 @@ import java.time.ZoneOffset;
 @Service
 public class TokenService {
 
-    @Value("${api.security.secreto}")
+    //@Value("12345678")
+    @Value("${api.security.token.secret}")
     private String apiSecret;
 
     public String generarToken(Usuario usuario) {
