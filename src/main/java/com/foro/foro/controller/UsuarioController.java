@@ -33,6 +33,17 @@ public class UsuarioController {
         return ResponseEntity.ok(listaUsuarios);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosListaUsuario> mostrarUsuario(@PathVariable Long id) {
+        Usuario usuario = usuarioRepository.getReferenceById(id);
+        DatosListaUsuario datosListaUsuario = new DatosListaUsuario(
+                usuario.getId(),
+                usuario.getNombre()
+        );
+
+        return ResponseEntity.ok(datosListaUsuario);
+    }
+
     // actualizar datos de usuarios
     @Transactional
     @PutMapping
