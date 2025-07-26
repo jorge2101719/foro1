@@ -24,9 +24,16 @@ public class Respuesta {
     private Long id;
     private String mensaje;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topico_id")
     private Topico topico;
+
     private LocalDateTime fecha;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+
     private Boolean solucion;
 
     public void actualizarRespuesta(DatosActualizarRespuesta datos) {

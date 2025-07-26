@@ -10,10 +10,6 @@ import com.foro.foro.domain.usuarios.Usuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-
 
 @Service
 public class TokenService {
@@ -24,12 +20,12 @@ public class TokenService {
 
     public String generarToken(Usuario usuario) {
         try {
-            Algorithm algorithm = Algorithm.HMAC256(apiSecret);
+            Algorithm algorithm = Algorithm.HMAC256("12345678");
             return JWT.create()
-                    .withIssuer("foro")
-                    .withSubject(usuario.getCorreo())
-                    .withClaim("id", usuario.getId())
-                    .withExpiresAt(expiracion())
+                    .withIssuer("auth0")
+//                    .withSubject(usuario.getCorreo())
+//                    .withClaim("id", usuario.getId())
+//                    .withExpiresAt(expiracion())
                     .sign(algorithm);
         } catch (JWTCreationException e) {
             throw new RuntimeException("No se creó el token");
@@ -56,9 +52,8 @@ public class TokenService {
         return verifier.getSubject();
     }
 
-    private Instant expiracion() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
-    }
-
+//    private Instant expiracion() {
+//        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+//    }
 
 }

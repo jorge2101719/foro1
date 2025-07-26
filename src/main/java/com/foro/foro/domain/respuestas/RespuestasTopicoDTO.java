@@ -2,14 +2,14 @@ package com.foro.foro.domain.respuestas;
 
 import java.time.LocalDateTime;
 
-public record TopicoDTO(
+public record RespuestasTopicoDTO(
         String mensaje,
         LocalDateTime fecha,
         String nombre,
         Boolean solucion
 ) {
 
-    public TopicoDTO(Respuesta respuesta) {
+    public RespuestasTopicoDTO(Respuesta respuesta) {
         this(
                 respuesta.getMensaje(),
                 respuesta.getFecha(),

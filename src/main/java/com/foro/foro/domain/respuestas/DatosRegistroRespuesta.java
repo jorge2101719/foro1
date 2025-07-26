@@ -4,12 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record DatosRegistroRespuesta(
-        @NotNull Long id_usuario,
+        @NotNull Long topico_id,
         @NotBlank String mensaje,
-        @NotBlank String nombreCurso,
-        @NotBlank String titulo
+        @NotNull Long id_usuario
+
         ) {
-
-
 
 }

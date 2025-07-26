@@ -14,6 +14,6 @@ public interface TopicoRepository extends JpaRepository<Topico, Long> {
     Page<Topico> findAllByStatusTrue(Pageable pageable);
 
     @Query("SELECT r.respuestaList FROM Topico r WHERE r.id =: id_topico")
-    Page<Respuesta> findAllByRespuestas(Long id_topico, Pageable pageable);
+    Page<Respuesta> findAllByRespuestas(Long topico_id, Pageable pageable);
 
 }
