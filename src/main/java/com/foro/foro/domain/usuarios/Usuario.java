@@ -26,8 +26,8 @@ public class Usuario {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "perfil_usuario",
-            joinColumns = @JoinColumn(name = "id_usuario"),
+        name = "perfil_usuario",
+        joinColumns = @JoinColumn(name = "id_usuario"),
         inverseJoinColumns = @JoinColumn(name = "id_perfil")
     )
     private Set<Perfil> perfiles = new HashSet<>();

@@ -30,10 +30,15 @@ public class Topico {
     private LocalDateTime fecha;
     private Boolean status;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_curso")
     private Curso curso;
 
+    @OneToMany(mappedBy = "topico", fetch = FetchType.LAZY)
     private List<Respuesta> respuestaList;
 
     public Topico(@Valid DatosRegistroTopico datosRegistroTopico) {
@@ -57,7 +62,7 @@ public class Topico {
         }
     }
 
-    public void desativaTopico() {
+    public void desactivaTopico() {
         this.status = false;
     }
 

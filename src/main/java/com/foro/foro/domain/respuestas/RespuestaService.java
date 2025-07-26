@@ -30,10 +30,10 @@ public class RespuestaService {
         //Validar topico_id e usuario_id -> construir la respuesta y salvar en repositorio.
 
         if (topicoRepository.findById(datosRegistroRespuesta.topico_id()).isEmpty()) {
-            throw new ErrorDeConsulta("No se halló el topico");
+            throw new ErrorDeConsulta("No se halló el tópico");
         }
         if (!topicoRepository.findByStatusById(datosRegistroRespuesta.topico_id())) {
-            throw new ErrorDeConsulta("No se halló el topico");
+            throw new ErrorDeConsulta("No se halló el tópico");
         }
         if (usuarioRepository.findById(datosRegistroRespuesta.id_usuario()).isEmpty()) {
             throw new ErrorDeConsulta("No se halló el usuario");
