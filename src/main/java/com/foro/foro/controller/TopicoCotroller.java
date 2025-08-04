@@ -2,7 +2,6 @@ package com.foro.foro.controller;
 
 
 import com.foro.foro.domain.topicos.*;
-import com.foro.foro.domain.usuarios.DatosListaUsuario;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

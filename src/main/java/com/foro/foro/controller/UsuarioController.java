@@ -9,6 +9,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 
 @RestController
@@ -21,22 +24,30 @@ public class UsuarioController {
     // agregar usuarios
     @Transactional
     @PostMapping
-    public void registrarUsuario(@RequestBody @Valid DatosRegistroUsuario datos) {
+    public ResponseEntity<DatosListaUsuarios> registrarUsuario(@RequestBody @Valid DatosRegistroUsuario datos, UriComponentsBuilder uriComponentsBuilder) {
         //System.out.println("Datos del usuario: " + datos);
-        usuarioRepository.save(new Usuario(datos));
+        Usuario usuario = usuarioRepository.save(new Usuario(datos));
+        DatosListaUsuarios datosListaUsuarios = new DatosListaUsuarios(
+                usuario.getId(),
+                usuario.getNombre()
+        );
+
+        URI url = uriComponentsBuilder.path("usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
+
+        return ResponseEntity.created(url).body(datosListaUsuarios);
     }
 
     // listar usuarios
     @GetMapping
-    public ResponseEntity<Page<DatosListaUsuario>> listarUsuarios(@PageableDefault(size = 10) Pageable pageable) {
-        Page<DatosListaUsuario> listaUsuarios = usuarioRepository.findAll(pageable).map(DatosListaUsuario::new);
+    public ResponseEntity<Page<DatosListaUsuarios>> listarUsuarios(@PageableDefault(size = 10) Pageable pageable) {
+        Page<DatosListaUsuarios> listaUsuarios = usuarioRepository.findAll(pageable).map(DatosListaUsuarios::new);
         return ResponseEntity.ok(listaUsuarios);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DatosListaUsuario> mostrarUsuario(@PathVariable Long id) {
+    public ResponseEntity<DatosListaUsuarios> mostrarUsuario(@PathVariable Long id) {
         Usuario usuario = usuarioRepository.getReferenceById(id);
-        DatosListaUsuario datosListaUsuario = new DatosListaUsuario(
+        DatosListaUsuarios datosListaUsuario = new DatosListaUsuarios(
                 usuario.getId(),
                 usuario.getNombre()
         );
@@ -50,13 +61,16 @@ public class UsuarioController {
     public void actualizar(@RequestBody @Valid DatosActualizarUsuario datos) {
         Usuario usuario = usuarioRepository.getReferenceById(datos.id());
         usuario.actualizarUsuario(datos);
+
+        return;
     }
 
     // borrar usuario
     @Transactional
     @DeleteMapping("/{id}")
-    public void borrar(@PathVariable Long id) {
+    public ResponseEntity<Object> borrar(@PathVariable Long id) {
         usuarioRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
 
