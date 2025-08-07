@@ -13,7 +13,7 @@ public record RespuestasTopicoDTO(
         this(
                 respuesta.getMensaje(),
                 respuesta.getFecha(),
-                respuesta.getUsuario().getNombre(),
+                respuesta.getAutor().getNombre(),
                 respuesta.getSolucion()
         );
     }

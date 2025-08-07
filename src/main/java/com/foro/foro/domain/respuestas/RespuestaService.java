@@ -56,7 +56,7 @@ public class RespuestaService {
                 respuesta.getMensaje(),
                 respuesta.getTopico().getTitulo(),
                 respuesta.getFecha(),
-                respuesta.getUsuario().getNombre(),
+                respuesta.getAutor().getNombre(),
                 respuesta.getSolucion()
         );
 

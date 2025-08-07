@@ -10,6 +10,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/topicos")
@@ -21,8 +24,18 @@ public class TopicoCotroller {
     // agregar tópico
     @Transactional
     @PostMapping
-    public void registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico) {
-        topicoRepository.save(new Topico(datosRegistroTopico));
+    public ResponseEntity<DatosListaTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datos, UriComponentsBuilder uriComponentsBuilder) {
+        Topico topico = topicoRepository.save(new Topico(datos));
+        DatosListaTopico datosListaTopico = new DatosListaTopico(
+                topico.getId(),
+                topico.getTitulo(),
+                topico.getMensaje(),
+                topico.getFecha()
+        );
+
+        URI url = uriComponentsBuilder.path("topico/{id}").buildAndExpand(topico.getId()).toUri();
+
+        return ResponseEntity.created(url).body(datosListaTopico);
     }
 
     // listar tópico

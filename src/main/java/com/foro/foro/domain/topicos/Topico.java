@@ -21,18 +21,20 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Topico {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String titulo;
     private String mensaje;
+
+    @Column(name = "fecha")
     private LocalDateTime fecha;
     private Boolean status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+    private Usuario autor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_curso")
@@ -42,7 +44,11 @@ public class Topico {
     private List<Respuesta> respuestaList;
 
     public Topico(@Valid DatosRegistroTopico datosRegistroTopico) {
+        this.id = null;
+        this.titulo = datosRegistroTopico.titulo();
+        this.mensaje = datosRegistroTopico.mensaje();
     }
+
 
     public void actualizarTopico(@Valid DatosActualizarTopico datos) {
         boolean check = false;

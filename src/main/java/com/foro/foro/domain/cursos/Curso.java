@@ -17,22 +17,21 @@ public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre_curso;
+    private String nombre;
     private String categoria;
 
     public Curso(DatosRegistroCurso datosRegistroCurso) {
-        this.nombre_curso = datosRegistroCurso.nombre();
+        this.nombre = datosRegistroCurso.nombre();
         this.categoria = datosRegistroCurso.categoria();
     }
 
     public void actualizarCurso(DatosActualizarCurso datosActualizarCurso) {
         if (datosActualizarCurso.nombre() != null) {
-            this.nombre_curso = datosActualizarCurso.nombre();
+            this.nombre = datosActualizarCurso.nombre();
         }
 
         if (datosActualizarCurso.categoria() != null) {
             this.categoria = datosActualizarCurso.categoria();
         }
     }
-
 }

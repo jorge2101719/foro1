@@ -22,19 +22,20 @@ public class Respuesta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String mensaje;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "topico_id")
     private Topico topico;
 
-    private LocalDateTime fecha;
+    private LocalDateTime fecha = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+    private Usuario autor;
 
-    private Boolean solucion;
+    private Boolean solucion = false;
 
     public void actualizarRespuesta(DatosActualizarRespuesta datos) {
         boolean check = false;
