@@ -24,7 +24,7 @@ public class PerfilController {
     @PutMapping
     public ResponseEntity<DatosListaPerfil> actualizarPerfil(@RequestBody @Valid DatosActualizarPerfil datosActualizarPerfil) {
         Perfil perfil = perfilRepository.getReferenceById(datosActualizarPerfil.id());
-        perfil.actualizarPerfil(datosActualizarPerfil);
+        //perfil.actualizarPerfil(datosActualizarPerfil);
         return ResponseEntity.ok(new DatosListaPerfil(perfil));
     }
 

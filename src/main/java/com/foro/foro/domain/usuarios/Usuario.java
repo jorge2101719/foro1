@@ -20,10 +20,14 @@ public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
+
+    @Column(unique=true, nullable= false)
     private String correo;
+
+    @Column(nullable = false)
     private String clave;
-    //private Boolean admin = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -33,30 +37,27 @@ public class Usuario implements UserDetails {
     )
     private Set<Perfil> perfiles = new HashSet<>();
 
+
+
     public Usuario(DatosRegistroUsuario datos) {
         this.id = null;
         this.nombre = datos.nombre();
         this.correo = datos.correo();
         this.clave = datos.clave();
-        //this.admin = datos.admin();
     }
 
-    public void actualizarUsuario(DatosActualizarUsuario datos) {
-        if (datos.nombre() != null) {
-            this.nombre = datos.nombre();
-        }
 
-        if (datos.correo() != null) {
-            this.correo = datos.correo();
-        }
+    public Long getId() { return id; }
+    public String getNombre() { return nombre; }
+    //public void setNombre(String nombre) { this.nombre = nombre; }
+    public String getCorreo() { return correo; }
+    //public void setCorreo(String correo) { this.correo = correo; }
+    public String getClave() { return clave; }
+    //public void setClave(String clave) { this.clave = clave; }
+    public Set<Perfil> getPerfiles() { return perfiles; }
+    //public void setPerfiles(Set<Perfil> perfiles) { this.perfiles = perfiles; }
 
-        if (datos.clave() != null) {
-            this.clave = datos.clave();
-        }
-    }
-
-    // Métodos de UserDetails
-
+    // --- Métodos de UserDetails ---
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return perfiles;
@@ -73,23 +74,14 @@ public class Usuario implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+    public boolean isAccountNonExpired() { return true; }
 
     @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+    public boolean isAccountNonLocked() { return true; }
 
     @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+    public boolean isCredentialsNonExpired() { return true; }
 
     @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
+    public boolean isEnabled() { return true; }
 }

@@ -60,7 +60,7 @@ public class UsuarioController {
     @PutMapping
     public void actualizar(@RequestBody @Valid DatosActualizarUsuario datos) {
         Usuario usuario = usuarioRepository.getReferenceById(datos.id());
-        usuario.actualizarUsuario(datos);
+        //usuario.actualizarUsuario(datos);
 
         return;
     }

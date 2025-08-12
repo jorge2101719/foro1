@@ -23,15 +23,13 @@ public class Perfil implements GrantedAuthority {
         this.nombre = datosRegistroPerfil.nombre();
     }
 
-    public void actualizarPerfil(DatosActualizarPerfil datosActualizarPerfil) {
-        if (datosActualizarPerfil.nombre() != null) {
-            this.nombre = datosActualizarPerfil.nombre();
-        }
-    }
+    public Long getId() { return id; }
+    public String getNombre() { return nombre; }
+    //public void setNombre(String nombre) { this.nombre = nombre; }
 
     @Override
     public String getAuthority() {
-        return this.nombre;
+        return nombre;
     }
 
 
