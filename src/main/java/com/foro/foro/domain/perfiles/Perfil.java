@@ -1,22 +1,22 @@
 package com.foro.foro.domain.perfiles;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 @Table(name = "perfiles")
 @Entity(name = "Perfil")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Perfil {
+public class Perfil implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
 
     public Perfil(DatosRegistroPerfil datosRegistroPerfil) {
@@ -27,6 +27,11 @@ public class Perfil {
         if (datosActualizarPerfil.nombre() != null) {
             this.nombre = datosActualizarPerfil.nombre();
         }
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.nombre;
     }
 
 

@@ -1,4 +1,4 @@
 package com.foro.foro.utils.security;
 
-public record DatosAutenticacionUsuario() {
+public record DatosAutenticacionUsuario(String correo, String clave) {
 }

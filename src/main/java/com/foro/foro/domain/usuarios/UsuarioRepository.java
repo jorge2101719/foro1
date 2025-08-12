@@ -3,10 +3,15 @@ package com.foro.foro.domain.usuarios;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetails;
+
+//import javax.swing.text.html.Option;
+import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    Page<Usuario> findAll(Pageable pageable);
+    //Page<Usuario> findAll(Pageable pageable);
 
-    UserDetails findByCorreo(String username);
+    //UserDetails findByCorreo(String username);
+
+    Optional<Usuario> findByCorreo(String correo);
 }
